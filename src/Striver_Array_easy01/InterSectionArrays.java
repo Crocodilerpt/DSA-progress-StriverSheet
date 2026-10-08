@@ -8,7 +8,6 @@ public class InterSectionArrays {
             if (ar1[i] <= ar2[j]){
                 if (ar1[i] == ar2[j])
                     al.add(ar1[i++]);
-
                 i++;
             }else
                 j++;
@@ -16,8 +15,8 @@ public class InterSectionArrays {
         return al;
     }
     public static void main(String[] args){
-        int[] ar1 = {1,1,2,2,4,4,6};
-        int[] ar2 = {1,2,3,3,4,5,6};
+        int[] ar1= {1,1,2,4,6};
+        int[] ar2= {1,1,2,2,3,6,7};
         ArrayList<Integer> as = inter(ar1,ar2);
         for (Integer aa: as) System.out.print(aa+" ");
     }
