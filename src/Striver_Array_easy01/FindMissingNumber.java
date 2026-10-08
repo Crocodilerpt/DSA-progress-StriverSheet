@@ -56,3 +56,13 @@ static int funl(int[] num){
 
     return xor1 ^ xor2;
 }*/
+
+/* for 0 to n -- not for 1 to n
+static int misiNum(int[] num){
+    int xor = num.length;
+    for (int i = 0; i < num.length; i++) {
+        xor ^= i ^ num[i];
+
+    }
+    return xor;
+}*/

@@ -1,17 +1,14 @@
-import java.util.ArrayList;
 class Hehe02{
-    static void misiNum(int[] num){
-        ArrayList<Integer> al = new ArrayList<>();
-        for (int i = 0; i <=num.length; i++) {
-            al.add(i);
+    static int misiNum(int[] num){
+        int xor = num.length;
+        for (int i = 0; i < num.length; i++) {
+            xor ^= i ^ num[i];
+
         }
-        for(int i=0;i<num.length;i++){
-            if (i!=num[i])
-                System.out.println(al);
-        }
+        return xor;
     }
     public static void main(String[] args){
-        int[] arr= {1,2,3,5};
-        misiNum(arr);
+        int[] arr= {2,0,1,3};
+        System.out.println(misiNum(arr));
     }
 }
