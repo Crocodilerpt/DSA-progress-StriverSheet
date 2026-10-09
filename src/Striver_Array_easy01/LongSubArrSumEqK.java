@@ -1,21 +1,20 @@
 package Striver_Array_easy01;// Longest subarray sum == K
 public class LongSubArrSumEqK {// Sliding Window(variable size) positive only
-    static int subArrSum(int[] num,int k){
-        int maxlen=0;   int sum=0;  int left=0;
+    static int subArrSum(int[] num, int k) {
+        int sum = 0, len = 0, left = 0;
+        for (int i = 0; i < num.length; i++) {
+            sum += num[i];
 
-        for (int right=0; right < num.length; right++) {
-            sum = sum + num[right];
-
-            while (sum > k)
-                sum = sum - num[left++];
+            while (sum > k && left <= i)
+                sum -= num[left++];
 
             if (sum == k)
-                maxlen = Math.max(right-left+1,maxlen);
+                len = Math.max(len, i - left + 1);
         }
-        return maxlen;
+        return len;
     }
     public static void main(String[] args) {
-        int[] arr = {10,5,2,6,2,15,1,6,15};
+        int[] arr = {10,2,1,2,6,2,15,1,6,15};
         System.out.println(subArrSum(arr,15));
     }
 }
@@ -24,7 +23,7 @@ public class LongSubArrSumEqK {// Sliding Window(variable size) positive only
 /*  brute tc O(n^2)
 static int subArrSum(int[] num,int k){
     int maxlen=0;
-    for (int i = 0; i < num.length; i++) {
+    for (int right= 0; right< num.length; i++) {
         int sum=0;
         for (int j = i; j < num.length; j++) {
             sum += num[j];
@@ -36,18 +35,16 @@ static int subArrSum(int[] num,int k){
 }  */
 
 /* better by hashmap + Prefix sum for pos & negative
-static int funk(int[] num,int k){
-    HashMap<Integer,Integer> hm = new HashMap<>();
-    int maxlen=0;   int sum=0;
-    for(int i=0; i < num.length; i++){
-        sum = sum + num[i];
-
-        int need = sum - k;
-        if (hm.containsKey(need)){
-            int len = i - hm.get(need);
-            maxlen = Math.max(maxlen,len);
+static int sumEq(int[] num, int k) {
+    HashMap<Integer, Integer> hm = new HashMap<>();
+    hm.put(0, -1);
+    int sum = 0, ans = 0;
+    for (int right= 0; right< num.length; i++) {
+        sum += num[i];
+        if (hm.containsKey(sum - k)) {
+            ans = Math.max(ans, right- hm.get(sum - k));
         }
-        hm.put(sum,i);
+        hm.putIfAbsent(sum, i);
     }
-    return maxlen;
+    return ans;
 }*/
