@@ -1,20 +1,19 @@
-class Hehe02{ // longest sub array sum == k -- optimal
-    static int sumEq(int[] num, int k) {
-        int sum = 0, len = 0, left = 0;
-        for (int i = 0; i < num.length; i++) {
-            sum += num[i];
+class Hehe02{ // most consecutive one's -- brute force
+    static int consecutiveOne(int[] num) {
+        int maxLen=0;   int count=0;
+        for(int i=0; i<num.length;i++){
+            if (num[i]==1)
+                count++;
+            else
+                count=0;
 
-            while (sum > k && left <= i)
-                sum -= num[left++];
-
-            if (sum == k)
-                len = Math.max(len, i - left + 1);
+            maxLen = Math.max(count,maxLen);
         }
-        return len;
+        return maxLen;
     }
     public static void main(String[] args){
-        int[] arr = {10,2,1,2,6,2,15,1,6,15};
-        int ans = sumEq(arr,15);
+        int[] num = {1,1,0,1,1,1,1,1,1,1,0,0,0};
+        int ans = consecutiveOne(num);
         System.out.println(ans);
     }
 }
