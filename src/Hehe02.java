@@ -1,19 +1,22 @@
-class Hehe02{ // most consecutive one's -- brute force
-    static int consecutiveOne(int[] num) {
-        int maxLen=0;   int count=0;
-        for(int i=0; i<num.length;i++){
-            if (num[i]==1)
-                count++;
-            else
-                count=0;
+class Hehe02{ //rotate array by d places
+    static int[] rotByD(int[] num,int n, int d){
+        d = d % n;
+        int[] temp = new int[d];
+        for (int i = 0; i < d; i++)
+            temp[i] = num[i];
 
-            maxLen = Math.max(count,maxLen);
-        }
-        return maxLen;
+        for (int i = d; i < num.length; i++)
+            num[i-d] = num[i];
+
+        for (int i = n-d; i < n; i++)
+            num[i] = temp[i-(n-d)];
+
+        return num;
     }
     public static void main(String[] args){
-        int[] num = {1,1,0,1,1,1,1,1,1,1,0,0,0};
-        int ans = consecutiveOne(num);
-        System.out.println(ans);
+        int[] num = {1,2,3,4,5,6,7};
+        int[] nums = rotByD(num,7,4);
+        for (int a:nums) System.out.print(a+" ");
     }
 }
+

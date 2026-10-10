@@ -1,32 +1,37 @@
 package Striver_Array_easy01;// sorted array remove duplicate
 public class RemoveDuplicateArr {
-    static int rmvDupli(int[] num){ //brute
+    static int rmvDupli(int[] num) {
         int i=0;
-        for (int j = 0; j < num.length; j++) {
+        if (num.length == 0) return 0;
+        for (int j = 1; j < num.length; j++) {
             if (num[i] != num[j]){
+                num[i+1]=num[j];
                 i++;
-                num[i] = num[j];
             }
         }
         return i+1;
     }
-    public static void main(String[] args) {
-        int[] arr = {1,2,2,2,3,4,5,5,5,6};
-        int ps = rmvDupli(arr);
-        for (int i=0; i < ps; i++)
-            System.out.print(arr[i]+" ");
+    public static void main(String[] args){
+        int[] num = {1,1,2,2,2,3,4,4,5};
+        int an = rmvDupli(num);
+        for (int a=0;a<an;a++) System.out.print(num[a]+" ");
+
     }
 }
 
-/* brute tc = O(n+m) , sc = O(n)
-static int rmvDupli(int[] nums){
-    Set<Integer> hs = new HashSet<>();
-    for (Integer se : nums) hs.add(se);
+/* better tc o(n), sc o(n).
+static void rmvDupli(int[] num) {
+    HashSet<Integer> hs = new HashSet<>();
+    for (int i = 0; i < num.length; i++) {
+        hs.add(num[i]);
+    }
+    System.out.println(hs);
+}*/
 
-    int index = 0;
-    for (int ans: hs)
-        nums[index++] = ans;
-
-    return index;
-}
- */
+/*
+static void rmvDupli(int[] num) {
+    for (int i = 0; i < num.length; i++) {
+        if (i==0 || num[i] != num[i-1])
+            System.out.print(num[i]+" ");
+    }
+}*/

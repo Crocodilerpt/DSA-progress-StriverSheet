@@ -37,3 +37,13 @@ static int[] rotByD(int[] num,int n, int d){
         return num;
 }
 */
+
+/*
+static void rmvDupli(int[] num,int d) {
+    ArrayList<Integer> al = new ArrayList<>();
+    for (int i = d; i < num.length; i++)
+        al.add(num[i]);
+
+    for (int i = 0; i < d; i++)
+        al.add(num[i]);
+}*/
