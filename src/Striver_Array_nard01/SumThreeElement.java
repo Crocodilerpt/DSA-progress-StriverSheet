@@ -1,19 +1,30 @@
 package Striver_Array_nard01;
 import java.util.*;
 public class SumThreeElement {
-    static List<List<Integer>> sumThree(int[] num,int target){
-        Set<List<Integer>> ds1 = new HashSet<>();
-
-
-
-
-        return new ArrayList<>(ds1);
+    static void sum3(int[] num, int target) {
+        Arrays.sort(num);
+        int n = num.length;
+        for (int i = 0; i < n - 2; i++) {
+            if (i > 0 && num[i] == num[i - 1]) continue; // skip duplicate i
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                int sum = num[i] + num[j] + num[k];
+                if (sum == target) {
+                    System.out.println(num[i] + " " + num[j] + " " + num[k]);
+                    j++;
+                    k--;
+                    while (j < k && num[j] == num[j - 1]) j++;
+                    while (j < k && num[k] == num[k + 1]) k--;
+                }else if (sum < target)
+                    j++;
+                else
+                    k--;
+            }
+        }
     }
     public static void main(String[] args){
-        int[] num = {2,5,0,2,9,1,9};
-        sumThree(num,1);
-        List<List<Integer>> ans = sumThree(num,19);
-        for (List an: ans) System.out.print(an+" ");
+        int[] num = {2,5,0,-2,3,1,9};
+        sum3(num,1);
     }
 }
 
@@ -36,19 +47,20 @@ static int[] SumOf3(int[] num,int target){
 
 
 /* better o(n^2), o(n^2)+o(n)
-static List<List<Integer>> threeSum(int[] nums) {
-    Set<List<Integer>> res = new HashSet<>();
-    for (int i = 0; i < nums.length; i++) {
-        Set<Integer> seen = new HashSet<>();
-        for (int j = i + 1; j < nums.length; j++) {
-            int need = - nums[i] - nums[j];
-            if (seen.contains(need)) {
-                List<Integer> t = Arrays.asList(nums[i], nums[j], need);
-                Collections.sort(t);
-                res.add(t); // set removes duplicates
+static List<List<Integer>> sum3(int[] num){
+    Set<List<Integer>> ds1 = new HashSet<>();
+    for (int i = 0; i < num.length; i++) {
+        Set<Integer> ds2 = new HashSet<>();
+        for (int j = i+1; j < num.length; j++) {
+            int val = -(num[i] + num[j]);
+
+            if (ds2.contains(val)) {
+                List<Integer> ds3 = Arrays.asList(num[i], num[j], val);
+                Collections.sort(ds3);
+                ds1.add(ds3);
             }
-            seen.add(nums[j]);
+            ds2.add(num[j]);
         }
     }
-    return new ArrayList<>(res);
+    return new ArrayList<>(ds1);
 }*/

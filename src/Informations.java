@@ -1,4 +1,7 @@
-public class Informations{/*
+/*
+
+
+dsa practice
 
 
 
@@ -6,8 +9,6 @@ public class Informations{/*
 
 
 
-*/
-}
 
 
 
@@ -15,4 +16,4 @@ public class Informations{/*
 
 
 
-
+ */
