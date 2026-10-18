@@ -18,8 +18,8 @@ public class SumFourElements {
                     else{
                         System.out.println(num[i]+" "+num[j]+" "+num[k]+" "+num[l]);
                     k++; l--;
-                    while (k<l && num[k]==num[k-1]){k++;};
-                    while (k<l && num[l]==num[l+1]){l--;};
+                    while (k<l && num[k]==num[k-1]) k++;
+                    while (k<l && num[l]==num[l+1]) l--;
                     }
                 }
             }
