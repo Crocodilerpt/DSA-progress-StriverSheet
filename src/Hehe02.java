@@ -1,21 +1,32 @@
-import java.util.HashMap;
-import java.util.Map;
-class Hehe02{// sum of xor
-    static int practice(int[] num, int k) {
-        Map<Integer,Integer> hm = new HashMap<>();
-        hm.put(0, 1);
-        int cnt = 0, xor = 0;
-        for (int n : num) {
-            xor ^= n;
-            cnt += hm.getOrDefault(xor ^ k, 0);
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+class Hehe02{
+    static int[][] mergeOver(int[][] arr) {
+        if (arr.length <= 1) return arr;
+        Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
+        List<int[]> al = new ArrayList<>();
 
-            hm.put(xor, hm.getOrDefault(xor, 0) + 1);
+        for (int[] ar : arr) {
+            if (al.isEmpty() || ar[0] > al.get(al.size() - 1)[1]) {
+                al.add(ar.clone());
+            } else {
+                int[] last = al.get(al.size() - 1);
+                last[1] = Math.max(last[1], ar[1]);
+            }
         }
-        return cnt;
+        return al.toArray(new int[al.size()][]);
     }
     public static void main(String[] args){
-        int[] num = {4,2,2,6,4};
-        int an = practice(num,6);
-        System.out.println(an);
+        int[][] arr = {{1,3},
+                {2,6},
+                {8,9},
+                {9,11},
+                {8,10},
+                {2,4},
+                {15,18},
+                {16,17}};
+        int[][] ans = mergeOver(arr);
+        System.out.println(Arrays.deepToString(ans));
     }
 }

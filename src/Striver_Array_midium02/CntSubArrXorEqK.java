@@ -4,16 +4,13 @@ import java.util.Map;
 public class CntSubArrXorEqK {
     static int Xork(int[] num, int k){
         Map<Integer,Integer> hm = new HashMap<>();
-        hm.put(0,1);
-        int cnt=0; int xor=0;
-        for(int i=0; i<num.length;i++){
-            xor = xor ^ num[i];
+        hm.put(0, 1);
+        int cnt = 0, xor = 0;
+        for (int n : num) {
+            xor ^= n;
+            cnt += hm.getOrDefault(xor ^ k, 0);
 
-            int value = xor ^ k;
-            if(hm.containsKey(value))
-                cnt = cnt + hm.get(value);
-
-            hm.put(xor,hm.getOrDefault(xor,0)+1);
+            hm.put(xor, hm.getOrDefault(xor, 0) + 1);
         }
         return cnt;
     }
