@@ -1,20 +1,18 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 class Hehe02{
-    static int[][] mergeOver(int[][] arr) {
-        if (arr.length <= 1) return arr;
+    static int[][] mergeOver(int[][] arr){
+        ArrayList<int[]> al = new ArrayList<>();
         Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
-        List<int[]> al = new ArrayList<>();
-
-        for (int[] ar : arr) {
-            if (al.isEmpty() || ar[0] > al.get(al.size() - 1)[1]) {
+        if (arr.length <= 1)return arr;
+        for (int i = 0; i < arr.length; i++) {
+            int[] ar = arr[i];
+            if(al.isEmpty() || ar[0] > al.get(al.size()-1)[1])
                 al.add(ar.clone());
-            } else {
-                int[] last = al.get(al.size() - 1);
-                last[1] = Math.max(last[1], ar[1]);
-            }
-        }
+        else{
+            int[] last = al.get(al.size()-1);
+            last[1] = Math.max(last[1],ar[1]);
+        }}
         return al.toArray(new int[al.size()][]);
     }
     public static void main(String[] args){
