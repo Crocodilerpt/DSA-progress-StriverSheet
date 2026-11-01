@@ -1,30 +1,28 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 class Hehe02{
-    static int[][] mergeOver(int[][] arr){
-        ArrayList<int[]> al = new ArrayList<>();
-        Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
-        if (arr.length <= 1)return arr;
-        for (int i = 0; i < arr.length; i++) {
-            int[] ar = arr[i];
-            if(al.isEmpty() || ar[0] > al.get(al.size()-1)[1])
-                al.add(ar.clone());
-        else{
-            int[] last = al.get(al.size()-1);
-            last[1] = Math.max(last[1],ar[1]);
-        }}
-        return al.toArray(new int[al.size()][]);
+    static void mergeArray(int[] ar1,int[] ar2){
+        for(int i=0; i < ar1.length; i++){
+            for(int j=0; j < ar2.length; j++){
+                int min = 0;
+                if (ar2[j] > min) min = ar2[j];
+                if(ar1[i] > min)
+                    swaps(ar1,ar2,i,j);
+                else if(ar1[i] < ar2[j])
+                    break;
+            }
+        }
+        Arrays.sort(ar2);
+    }
+    static void swaps(int[] ar1,int[] ar2,int i,int j){
+        int temp = ar1[i];
+        ar1[i] = ar2[j];
+        ar2[j] = temp;
     }
     public static void main(String[] args){
-        int[][] arr = {{1,3},
-                {2,6},
-                {8,9},
-                {9,11},
-                {8,10},
-                {2,4},
-                {15,18},
-                {16,17}};
-        int[][] ans = mergeOver(arr);
-        System.out.println(Arrays.deepToString(ans));
+        int[] ar1 = {1,3,5,7};
+        int[] ar2 = {0,2,6,8,9};
+        mergeArray(ar1,ar2);
+        for (int a :ar1) System.out.print(a+" ");
+        for (int b :ar2) System.out.print(b+" ");
     }
 }
