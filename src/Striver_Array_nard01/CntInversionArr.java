@@ -1,33 +1,41 @@
-package Striver_Array_nard01;// count the pair where left element is larger
+package Striver_Array_nard01;// count the pair where i element is larger
 public class CntInversionArr {
-    int count=0;
-    static void mergeSort(int[] num,int low, int high){
-        if (low >= high) return;
-        int mid = low + (high - low)/2;
-        mergeSort(num,low,mid);
-        mergeSort(num,mid+1,high);
-        merge(num,low,mid,high);
+    static int mergeSort(int[] num,int low, int high){
+        int count = 0;
+        if (low >= high){
+            return count;
+        }
+        int mid = (low + high)/2;
+        count += mergeSort(num,low,mid);
+        count += mergeSort(num,mid+1,high);
+        count += merge(num,low,mid,high);
+        return count;
     }
-    static void merge(int[] num,int low, int mid, int high){
+    static int merge(int[] num,int low, int mid, int high){
+        int count =0;
         int[] temp = new int[high - low + 1];
-        int left = low; int right = mid+1;
-        int t = 0;
-        while (left <= mid && right <= high){
-            if (num[left] <= num[right]){
-                temp[t++] = num[left++];
-            }else{
-                temp[t] = num[right];
-                t++; right++;
+        int i = low; int j = mid+1;
+        int k = 0;
+        while (i <= mid && j <= high){
+            if (num[i] <= num[j])
+                temp[k++] = num[i++];
+            else{
+                temp[k++] = num[j++];
+                count += (mid - i + 1);
             }
         }
-        while (left <= mid) temp[t++] = num[left++];
-        while (right <= high) temp[t++] = num[left++];
-        System.arraycopy(temp, 0,num, low, temp.length);
+        while (i <= mid) temp[k++] = num[i++];
+        while (j <= high) temp[k++] = num[j++];
+
+        for (int x=0; x < temp.length; x++){
+            num[low+x] = temp[x];
+        }
+        return count;
     }
     public static void main(String[] args){
         int[] arr = {5,3,2,4,1};
-        mergeSort(arr,0,arr.length-1);
-        System.out.println(java.util.Arrays.toString(arr));
+        int ans = mergeSort(arr,0,arr.length-1);
+        System.out.println(ans);
     }
 }
 
