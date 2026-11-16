@@ -18,6 +18,7 @@ public class MaxProductSubArr {
     }
 }
 
+
 /* brute
 static int maxProduct(int[] a){
     int max = Integer.MIN_VALUE;
@@ -30,4 +31,18 @@ static int maxProduct(int[] a){
         }
     }
     return max;
+}*/
+
+
+/*
+static int maxProduct(int[] a) {
+    int max = a[0], min = a[0], ans = a[0];
+    for (int i = 1; i < a.length; i++) {
+        int x = a[i];
+        int tmpMax = Math.max(x, Math.max(max * x, min * x));
+        min = Math.min(x, Math.min(max * x, min * x));
+        max = tmpMax;
+        ans = Math.max(ans, max);
+    }
+    return ans;
 }*/
